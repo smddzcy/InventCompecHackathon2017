@@ -11,4 +11,5 @@
 class City < ApplicationRecord
   acts_as_copy_target
   has_many :store
+  has_many :weather
 end
