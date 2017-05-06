@@ -26,7 +26,8 @@ def main(argv):
     with tf.Session() as sess:
         saver = tf.train.Saver()
         # Restore the trained model
-        saver.restore(sess, os.getcwd() + "/model_files/multivariate-model.ckpt")
+        path = os.path.dirname(os.path.realpath(__file__))
+        saver.restore(sess, path + "/model_files/multivariate-model.ckpt")
         predict_in = np.asarray(json.loads(argv[0]))
         predict_in = normalize_matrix(predict_in)
         result = sess.run(y, feed_dict={ x: predict_in })

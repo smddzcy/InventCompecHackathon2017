@@ -11,7 +11,8 @@ steps = 10000
 # Learning rate to use on the optimizer
 learn_rate = 0.001
 # Path to save the trained model
-model_path = os.getcwd() + "/model_files/multivariate-model.ckpt"
+path = path = os.path.dirname(os.path.realpath(__file__))
+model_path = path + "/model_files/multivariate-model.ckpt"
 
 RANDOM_SEED = 42
 tf.set_random_seed(RANDOM_SEED)

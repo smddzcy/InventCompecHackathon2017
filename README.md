@@ -1,7 +1,7 @@
 # Wow Analytics
 
 - API Root: https://wowteam-inventcompechackathon.herokuapp.com/
-- API Documentation: https://wowteam-inventcompechackathon.herokuapp.com/apipie/
+- API Documentation: https://wowteam-inventcompechackathon.herokuapp.com/doc/
 
 ## Folder Structure
 

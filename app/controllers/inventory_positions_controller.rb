@@ -104,12 +104,61 @@ class InventoryPositionsController < ApplicationController
     render json: result
   end
 
+  # GET /inventory_positions/predict_sales_quantity
+  api :GET, '/inventory_positions/predict_sales_quantity', 'Gives the daily sales quantity predictions for the given parameters'
+  example '[
+    {
+      "date": "2017-01-01",
+      "predict_sales_quantity": 1.0319905281066895
+    },
+    {
+      "date": "2017-01-02",
+      "predict_sales_quantity": 1.0339000225067139
+    },
+    {
+      "date": "2017-01-03",
+      "predict_sales_quantity": 1.0358095169067383
+    },
+    {
+      "date": "2017-01-04",
+      "predict_sales_quantity": 1.0377191305160522
+    }
+  ]'
+  param :start_date, String
+  param :end_date, String
+  param :store_id, :number
+  param :product_id, :number
+  param :price, String
   def predict_sales_quantity
     start_date = params[:start_date].to_date()
     end_date = params[:end_date].to_date()
-    product_group = params[:product_group]
+    store_id = params[:store_id]
+    product_id = params[:product_id]
+    price = params[:price]
 
-    
+    # Build the prediction input.
+    predict_in = []
+    (start_date.to_date..end_date.to_date).to_a.each_with_index do |date, i|
+      predict_in << [date.day, date.month, "#{date.day}#{"%02d" % date.month}".to_i,
+                     store_id, product_id, price]
+    end
+    predict_in = JSON.generate(predict_in).gsub('"', '')
+
+    # Get the prediction output from prediction script, which uses the trained
+    # TensorFlow model.
+    predict_out = `python #{Rails.root.to_s}/tensorflow-ml/predict.py "#{predict_in}"`
+    predict_out = JSON.parse(predict_out)
+
+    # Build the result json array.
+    result = []
+    (start_date.to_date..end_date.to_date).to_a.each_with_index do |date, i|
+      result << {
+        date: date,
+        predict_sales_quantity: predict_out[i][0]
+      }
+    end
+
+    render json: result
   end
 
   private
