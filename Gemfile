@@ -54,3 +54,6 @@ gem 'postgres-copy'
 # Pagination stuff
 gem 'will_paginate'
 gem 'api-pagination'
+
+# Documentation gem
+gem 'apipie-rails'

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  apipie
   resources :weathers
   resources :products
   resources :inventory_positions

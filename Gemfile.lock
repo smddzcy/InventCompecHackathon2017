@@ -42,6 +42,9 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     api-pagination (4.5.2)
+    apipie-rails (0.4.0)
+      json
+      rails (>= 4.0)
     arel (7.1.4)
     builder (3.2.3)
     byebug (9.0.6)
@@ -57,6 +60,7 @@ GEM
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     i18n (0.8.1)
+    json (2.0.4)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -156,6 +160,7 @@ PLATFORMS
 DEPENDENCIES
   annotate
   api-pagination
+  apipie-rails
   byebug
   factory_girl_rails
   listen (~> 3.0.5)
