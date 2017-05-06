@@ -18,9 +18,9 @@ class CitiesController < ApplicationController
 
   # POST /cities
   api :POST, '/cities'
-  param :name, :string
-  param :latitude, :float
-  param :longitude, :float
+  param :name, String
+  param :latitude, :number
+  param :longitude, :number
   def create
     @city = City.new(city_params)
 
@@ -34,9 +34,9 @@ class CitiesController < ApplicationController
   # PATCH/PUT /cities/1
   api :PUT, '/cities/:id'
   param :id, :number
-  param :name, :string
-  param :latitude, :float
-  param :longitude, :float
+  param :name, String
+  param :latitude, :number
+  param :longitude, :number
   def update
     if @city.update(city_params)
       render json: @city

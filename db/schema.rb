@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170506154645) do
+ActiveRecord::Schema.define(version: 20170506223523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20170506154645) do
     t.integer "store_stock"
     t.integer "incoming_stock"
     t.float   "sales_revenue"
-    t.string  "date"
+    t.date    "date"
     t.index ["product_id"], name: "index_inventory_positions_on_product_id", using: :btree
     t.index ["store_id"], name: "index_inventory_positions_on_store_id", using: :btree
   end

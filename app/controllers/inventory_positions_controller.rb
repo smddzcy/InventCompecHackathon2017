@@ -38,6 +38,17 @@ class InventoryPositionsController < ApplicationController
     @inventory_position.destroy
   end
 
+  # GET /inventory_positions/sales_quantity?start_date=15.06.2015&end_date=15.09.2017&product_group=5
+  def sales_quantity
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+    product_group = params[:product_group]
+
+    InventoryPosition.where()
+
+    render json: sales_quantity
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_inventory_position
