@@ -46,6 +46,7 @@ class InventoryPositionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def inventory_position_params
-      params.require(:inventory_position).permit(:store_id, :product_id, :sales_quantity, :store_stock, :incoming_stock, :sales_revenue, :date)
+      params.require(:inventory_position).permit(:store_id, :product_id,
+          :sales_quantity, :store_stock, :incoming_stock, :sales_revenue, :date)
     end
 end

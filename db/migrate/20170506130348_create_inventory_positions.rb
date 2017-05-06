@@ -7,9 +7,7 @@ class CreateInventoryPositions < ActiveRecord::Migration[5.0]
       t.integer :store_stock
       t.integer :incoming_stock
       t.float :sales_revenue
-      t.date :date
-
-      t.timestamps
+      t.string :date
     end
   end
 end
