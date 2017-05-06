@@ -1,5 +1,8 @@
 # Wow Analytics
 
+- API Root: https://wowteam-inventcompechackathon.herokuapp.com/
+- API Documentation: https://wowteam-inventcompechackathon.herokuapp.com/apipie/
+
 ## Folder Structure
 
 - `tensorflow-ml` folder contains the files and scripts of the machine learning part.

@@ -2,7 +2,7 @@ class CitiesController < ApplicationController
   before_action :set_city, only: [:show, :update, :destroy]
 
   # GET /cities
-  api :GET, '/cities'
+  api :GET, '/cities', 'Retrieves all cities'
   def index
     @cities = City.all
 
@@ -10,14 +10,14 @@ class CitiesController < ApplicationController
   end
 
   # GET /cities/1
-  api :GET, '/cities/:id'
+  api :GET, '/cities/:id', 'Retrieves a city with the given id'
   param :id, :number
   def show
     render json: @city
   end
 
   # POST /cities
-  api :POST, '/cities'
+  api :POST, '/cities', 'Creates a city'
   param :name, String
   param :latitude, :number
   param :longitude, :number
@@ -32,7 +32,7 @@ class CitiesController < ApplicationController
   end
 
   # PATCH/PUT /cities/1
-  api :PUT, '/cities/:id'
+  api :PUT, '/cities/:id', 'Updates a city'
   param :id, :number
   param :name, String
   param :latitude, :number
@@ -46,7 +46,7 @@ class CitiesController < ApplicationController
   end
 
   # DELETE /cities/1
-  api :DELETE, '/cities/:id'
+  api :DELETE, '/cities/:id', 'Deletes a city'
   param :id, :number
   def destroy
     @city.destroy
