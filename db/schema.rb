@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170506131113) do
+ActiveRecord::Schema.define(version: 20170506154645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,7 +44,18 @@ ActiveRecord::Schema.define(version: 20170506131113) do
     t.index ["city_id"], name: "index_stores_on_city_id", using: :btree
   end
 
+  create_table "weathers", force: :cascade do |t|
+    t.integer  "city_id"
+    t.datetime "date"
+    t.float    "temperature"
+    t.integer  "type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["city_id"], name: "index_weathers_on_city_id", using: :btree
+  end
+
   add_foreign_key "inventory_positions", "products"
   add_foreign_key "inventory_positions", "stores"
   add_foreign_key "stores", "cities"
+  add_foreign_key "weathers", "cities"
 end

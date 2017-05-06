@@ -4,7 +4,7 @@ class CreateWeathers < ActiveRecord::Migration[5.0]
       t.references :city, foreign_key: true
       t.datetime :date
       t.float :temperature
-      t.int :type
+      t.integer :type
 
       t.timestamps
     end
