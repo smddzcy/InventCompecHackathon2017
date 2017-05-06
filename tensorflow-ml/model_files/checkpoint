@@ -1,0 +1,2 @@
+model_checkpoint_path: "/Users/smddzcy/Desktop/InventCompecHackathon2017/tensorflow-ml/model_files/multivariate-model.ckpt"
+all_model_checkpoint_paths: "/Users/smddzcy/Desktop/InventCompecHackathon2017/tensorflow-ml/model_files/multivariate-model.ckpt"
