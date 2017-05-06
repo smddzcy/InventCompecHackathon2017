@@ -5,7 +5,7 @@ class InventoryPositionsController < ApplicationController
   def index
     @inventory_positions = InventoryPosition.all
 
-    render json: @inventory_positions
+    paginate json: @inventory_positions, per_page: 100
   end
 
   # GET /inventory_positions/1

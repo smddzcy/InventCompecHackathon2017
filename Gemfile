@@ -50,3 +50,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # CSV-Model ORM
 gem 'postgres-copy'
+
+# Pagination stuff
+gem 'will_paginate'
+gem 'api-pagination'
