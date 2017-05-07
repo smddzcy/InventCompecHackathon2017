@@ -9,6 +9,7 @@
   "author": "Samed Duzcay <admin@smddzcy.com> (http://www.smddzcy.com/)",
   "license": "ISC",
   "dependencies": {
-    "google-trends-api": "^4.1.0"
+    "google-trends-api": "^4.1.0",
+    "lodash": "^4.17.4"
   }
 }

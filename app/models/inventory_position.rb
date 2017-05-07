@@ -16,4 +16,8 @@ class InventoryPosition < ApplicationRecord
   acts_as_copy_target
   belongs_to :store
   belongs_to :product
+
+  def as_json(options = {})
+    super.merge(date: date.strftime('%d.%m.%Y'))
+  end
 end

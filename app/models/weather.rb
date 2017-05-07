@@ -13,4 +13,8 @@
 
 class Weather < ApplicationRecord
   belongs_to :city
+
+  def as_json(options = {})
+    super.merge(date: date.strftime('%d.%m.%Y %H:%M:%S'))
+  end
 end
