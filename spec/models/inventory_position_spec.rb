@@ -9,7 +9,7 @@
 #  store_stock    :integer
 #  incoming_stock :integer
 #  sales_revenue  :float
-#  date           :string
+#  date           :date
 #
 
 require 'rails_helper'
