@@ -83,23 +83,28 @@ class InventoryPositionsController < ApplicationController
   param :start_date, String
   param :end_date, String
   param :product_group, :number
+  param :product_id, :number, "Optional, if product_id is given, product_group will be unused"
   def sales_quantity
     start_date = params[:start_date].to_date()
     end_date = params[:end_date].to_date()
     product_group = params[:product_group]
+    product_id = params[:product_id]
 
     unless start_date and end_date and product_group
       render json: "You should give all the necessary query params", status: :unprocessable_entity
     end
 
-    result = InventoryPosition.joins(:product)
-                .where(products: {product_group: product_group})
-                .where(date: start_date..end_date)
-                .all.group_by(&:date)
+    result = InventoryPosition.joins(:product).where(date: start_date..end_date)
 
-    result = result.map do |k, el|
-              { date: k, sales_quantity: el.map(&:sales_quantity).sum }
-             end
+    if product_id.present?
+      result = result.where(products: {id: product_id})
+    else
+      result = result.where(products: {product_group: product_group})
+    end
+
+    result = result.all.group_by(&:date).map do |k, el|
+      { date: k, sales_quantity: el.map(&:sales_quantity).sum }
+    end
 
     render json: result
   end
