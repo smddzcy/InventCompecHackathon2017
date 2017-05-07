@@ -129,7 +129,7 @@ class InventoryPositionsController < ApplicationController
   end
 
   # GET /inventory_positions/sales_quantity_by_store
-  api :GET, '/inventory_positions/sales_quantity_by_store_by_product', 'Gives the sales quantity grouped by stores for the given time period and product id'
+  api :GET, '/inventory_positions/sales_quantity_by_store_by_product', 'Gives the sales quantity grouped by dates for the given store and product id'
   param :store_id, String
   param :product_id, String
   def sales_quantity_by_store_by_product
