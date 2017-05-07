@@ -9,7 +9,7 @@ display_step = 100
 # Number of training steps
 steps = 10000
 # Learning rate to use on the optimizer
-learn_rate = 0.001
+learn_rate = 0.0001
 # Path to save the trained model
 path = path = os.path.dirname(os.path.realpath(__file__))
 model_path = path + "/model_files/multivariate-model.ckpt"
@@ -28,12 +28,16 @@ def get_data():
 train_X, test_X, train_Y, test_Y = get_data()
 
 # Normalize each column in the matrix
+normalization_values = np.zeros((train_X.shape[1], 2))
+
 def normalize_matrix(matrix):
     for i in range(matrix.shape[1]):
-        matrix[:, [i]] -= np.mean(matrix[:, [i]], axis=0)
+        mean = np.mean(matrix[:, [i]], axis=0)
+        matrix[:, [i]] -= mean
         std = np.std(matrix[:, [i]], axis=0)
         if std != 0:
             matrix[:, [i]] /= np.std(matrix[:, [i]], axis=0)
+        normalization_values[i] = [mean, std]
     return matrix
 
 train_X = normalize_matrix(train_X)
@@ -66,6 +70,11 @@ with tf.Session() as sess:
           print("cost: %f" % sess.run(cost, feed_dict={ x: test_X, y_: test_Y }))
 
     print("Training is finished.")
+
+    # Print the normalization values for future use
+    print("Normalization values:")
+    print(normalization_values)
+
     # Save model weights to disk
     save_path = saver.save(sess, model_path)
     print("Model saved in file: %s" % save_path)
