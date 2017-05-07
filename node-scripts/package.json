@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "google-trends-api": "^4.1.0",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "util": "^0.10.3"
   }
 }

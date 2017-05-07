@@ -468,7 +468,10 @@ def main(argv):
         predict_in = np.array(map(map_fn, np.asarray(json.loads(argv[0]))))
         predict_in = normalize_matrix(predict_in)
         result = sess.run(y, feed_dict={ x: predict_in })
-        print(json.dumps(result.tolist()))
+        f = open('out.txt', 'w')
+        f.write(json.dumps(result.tolist()))
+        f.close()
 
 if __name__ == "__main__":
-   main(sys.argv[1:])
+    inp = open("inp.txt").read()
+    main(inp.split('\n', 1))

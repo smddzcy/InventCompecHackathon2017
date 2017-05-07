@@ -128,6 +128,26 @@ class InventoryPositionsController < ApplicationController
     render json: result
   end
 
+  # GET /inventory_positions/sales_quantity_by_store
+  api :GET, '/inventory_positions/sales_quantity_by_store_by_product', 'Gives the sales quantity grouped by stores for the given time period and product id'
+  param :store_id, String
+  param :product_id, String
+  def sales_quantity_by_store_by_product
+    product_id = params[:product_id]
+    store_id = params[:store_id]
+
+    result = InventoryPosition.joins(:product, :store)
+                .where(stores: {id: store_id})
+                .where(products: {id: product_id})
+
+
+    result = result.all.group_by(&:date).map do |k, el|
+      { date: k, sales_quantity: el.map(&:sales_quantity).sum }
+    end
+
+    render json: result
+  end
+
   # GET /inventory_positions/predict_sales_quantity
   api :GET, '/inventory_positions/predict_sales_quantity', 'Gives the daily sales quantity predictions for the given parameters'
   example '[
@@ -160,11 +180,14 @@ class InventoryPositionsController < ApplicationController
     product_id = params[:product_id]
     price = params[:price]
 
+    # Get the city id of store
+    city_id = Store.find_by(id: store_id).city.id
+
     # Build the prediction input.
     predict_in = []
     (start_date.to_date..end_date.to_date).to_a.each_with_index do |date, i|
-      predict_in << [date.day, date.month, "#{date.day}#{"%02d" % date.month}".to_i,
-                     store_id, product_id, price]
+      predict_in << ["#{date.year}#{"%02d" % date.month}#{"%02d" % date.day}",
+                     store_id, product_id, price, city_id]
     end
     predict_in = JSON.generate(predict_in).gsub('"', '')
 

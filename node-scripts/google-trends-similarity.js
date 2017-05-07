@@ -53,7 +53,7 @@ const keywordsAndErrors = new Promise((resolve, reject) => {
         .then((res) => {
           const obj = JSON.parse(res)
           if (gtCache[key] == null) {
-            gtCache[key] = new Promise((resolve, reject) => resolve(res))
+            gtCache[key] = new Promise((resolve2, reject2) => resolve2(res))
           }
 
           // Get timeline data of keyword and transform for it to a more usable one
@@ -95,9 +95,10 @@ const keywordsAndErrors = new Promise((resolve, reject) => {
                 sse: sumOfSquaredErrors
               })
 
-              if (i === NUM_OF_PRODUCT_GROUPS) {
+              if (i === NUM_OF_PRODUCT_GROUPS && key == PRODUCT_TYPES[PRODUCT_TYPES.length - 1]) {
                 resolve(result)
               }
+
             }).catch(console.error)
 
         }).catch(console.error)
