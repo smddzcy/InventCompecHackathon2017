@@ -36,10 +36,7 @@ def main(argv):
         path = os.path.dirname(os.path.realpath(__file__))
         saver.restore(sess, path + "/model_files/multivariate-model.ckpt")
         predict_in = np.asarray(json.loads(argv[0])).astype(float)
-        print(predict_in)
         predict_in = normalize_matrix(predict_in)
-        print(normalize_matrix(np.asarray([[1.,1.,101.,3.,10.,170.5]])))
-        print(predict_in)
         result = sess.run(y, feed_dict={ x: predict_in })
         print(json.dumps(result.tolist()))
 
