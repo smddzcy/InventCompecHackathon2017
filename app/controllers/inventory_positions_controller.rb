@@ -105,6 +105,29 @@ class InventoryPositionsController < ApplicationController
     render json: result
   end
 
+  # GET /inventory_positions/sales_quantity_by_store
+  api :GET, '/inventory_positions/sales_quantity_by_store', 'Gives the sales quantity grouped by stores for the given time period and product id'
+  param :start_date, String
+  param :end_date, String
+  param :product_id, :number
+  def sales_quantity_by_store
+    start_date = params[:start_date].to_date()
+    end_date = params[:end_date].to_date()
+    product_id = params[:product_id]
+
+    result = InventoryPosition.joins(:product)
+                .where(date: start_date..end_date)
+                .where(products: {id: product_id})
+
+    result = result.all.group_by(&:store_id).map do |k, el|
+      city = Store.find_by(id: k).city
+      { store_id: k, sales_quantity: el.map(&:sales_quantity).sum,
+        latitude: city.latitude, longitude: city.longitude }
+    end
+
+    render json: result
+  end
+
   # GET /inventory_positions/predict_sales_quantity
   api :GET, '/inventory_positions/predict_sales_quantity', 'Gives the daily sales quantity predictions for the given parameters'
   example '[
