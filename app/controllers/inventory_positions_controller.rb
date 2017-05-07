@@ -90,10 +90,6 @@ class InventoryPositionsController < ApplicationController
     product_group = params[:product_group]
     product_id = params[:product_id]
 
-    unless start_date and end_date and product_group
-      render json: "You should give all the necessary query params", status: :unprocessable_entity
-    end
-
     result = InventoryPosition.joins(:product).where(date: start_date..end_date)
 
     if product_id.present?
