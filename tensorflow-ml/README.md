@@ -4,17 +4,22 @@ After trying many models with many different parameters - convolutional neural n
 linear and logistic models - we've found a model that fits the best, which is
 a basic multivariate linear regression model.
 
-There are 6 1-dimensional features and 1 bias vector in the model. Predicted value
-is the sales quantity. The features are:
+There are **420 features** (1-dimensional) and 1 bias vector in the model.
+Predicted value is the sales quantity. The features are:
 
 |Feature|Explanation|
 |---|---------------|
-|`day`|Day of the month.|
-|`month`|Month of the year, left padded with 0 to 2 digits.|
-|`day_month`|Day & month together, to account special days in the model.|
+|`wday`|Day of the week, 7-dimensional one-hot boolean vector.|
+|`mday`|Day of the month, 31-dimensional one-hot boolean vector.|
+|`yday`|Day of the year, 366-dimensional one-hot boolean vector.|
+|`month`|Month of the year, 12-dimensional one-hot boolean vector.|
 |`store_id`|Code of the store.|
 |`product_id`|Code of the product.|
 |`price`|Price of the product, which can change and which we'll use to suggest better prices to the customer for specific products.|
+|`city_id`|City of the store.|
+
+We've used **Floyd** with **Docker** to train our model, because our computers are not
+powerful enough.
 
 ## Some Important Files
 - `data.csv` file contains the inputs and real world outputs. Features are on the
