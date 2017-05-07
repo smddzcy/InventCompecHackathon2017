@@ -1,0 +1,14 @@
+{
+  "name": "node-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "google-trends-similarity.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Samed Duzcay <admin@smddzcy.com> (http://www.smddzcy.com/)",
+  "license": "ISC",
+  "dependencies": {
+    "google-trends-api": "^4.1.0"
+  }
+}
